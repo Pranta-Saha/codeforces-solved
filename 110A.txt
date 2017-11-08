@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int cnt=0,cnt2=0,c,i;
+    char a[20];
+    cin>>a;
+
+
+    for(i=0;i<(strlen(a));i++){
+        cnt2++;
+        if((a[i]=='4')||(a[i]=='7')) cnt++;
+
+    }
+
+    if(((cnt==4)||(cnt==7)) ) cout<<"YES";
+    else cout<<"NO";
+
+
+
+}

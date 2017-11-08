@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    char a[105];
+    cin>>a;
+    int i,cnt,j,b[150];
+
+    for(i=97;i<124;i++) b[i]=0;
+
+    cnt=strlen(a);
+
+
+    for(j=0;j<cnt;j++){
+        for(i=97;i<123;i++){
+          if(a[j]==i){
+             b[i]++;
+
+          }
+
+        }
+
+    }
+    int c=0;
+    for(i=97;i<124;i++){
+        if(b[i]>0) c++;
+
+    }
+
+
+
+
+
+    if(c%2==0) cout<<"CHAT WITH HER!";
+    else cout<<"IGNORE HIM!";
+
+
+}

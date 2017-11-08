@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,a[120],i,j,mid,chek=0;
+    cin>>n;
+
+    for(i=0;i<n;i++) cin>>a[i];
+
+
+
+
+
+        for(i=0;i<n;i++) {
+            for(j=0;j<i;j++) {
+                if(a[i]<a[j]) swap(a[i],a[j]);
+            }
+        }
+
+        mid=n/2;
+
+        if((a[0]==a[mid-1])&&(a[mid]==a[n-1])&&(a[0]!=a[mid])){
+            cout<<"YES"<<endl<<a[0]<<" "<<a[n-1];
+        }else cout<<"NO";
+
+
+
+
+}

@@ -1,0 +1,10 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    char a[1005];
+    cin>>a;
+    if(a[0]>91) a[0]-=32;
+    cout<<a;
+
+}

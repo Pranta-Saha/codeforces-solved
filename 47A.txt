@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int i,a[100],n,re=0;
+    cin>>n;
+
+    for(i=1;i<=31;i++){
+        if(n==((i*(i+1))/2)){
+            cout<<"YES";
+            i=35;
+        }else re++;
+
+    }
+
+
+    if(re==31) cout<<"NO";
+
+}

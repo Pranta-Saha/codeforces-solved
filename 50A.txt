@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,m,dmn,m1,n1;
+    cin>>m>>n;
+
+    if(n%2==0){
+        dmn=n/2;
+        dmn=dmn*m;
+    }else if(m%2==0){
+        dmn=m/2;
+        dmn=dmn*n;
+    }else{
+        n1=max(m,n);
+        m1=min(m,n);
+
+        dmn=n1/2;
+        dmn=(dmn*m1)+m1/2;
+
+
+
+    }
+
+
+    cout<<dmn;
+}

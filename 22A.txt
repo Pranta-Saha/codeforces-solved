@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+main(){
+    int n,a[105],i,j,b[105],re=-9999;
+    cin>>n;
+    for(i=0;i<105;i++){
+        a[i]=-9999;
+    }
+    for(i=0;i<n;i++){
+        cin>>a[i];
+    }
+
+    for(i=0;i<n;i++){
+    for(j=0;j<i;j++){
+        if(a[i]<a[j]) swap(a[i],a[j]);
+    }
+    }
+
+    b[0]=a[0];
+    for(i=0;i<n;i++){
+       if(a[i]!=a[i+1]) {
+            re=a[i+1];
+            i=n;
+       }
+    }
+
+if(re==-9999) cout<<"NO";
+else cout<<re;
+
+}

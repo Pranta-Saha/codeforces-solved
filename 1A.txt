@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    double n,m,a;
+    long long re;
+    cin>>n>>m>>a;
+
+    n=ceil(n/a);
+    m=ceil(m/a);
+
+    re=n*m;
+
+    cout<<re;
+
+}

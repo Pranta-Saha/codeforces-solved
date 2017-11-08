@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,k,a[55],re,i,reo=0;
+    cin>>n>>k;
+
+    for(i=1;i<=n;i++) cin>>a[i];
+
+    re=k;
+
+    if(a[k]==0){
+
+            for(i=1;i<k;i++){
+                if(a[i]!=0) reo++;
+
+            }
+            cout<<reo;
+
+    }else{
+
+       for(i=(k+1);i<=n;i++){
+          if(a[k]==a[i]) re++;
+          else break;
+       }
+
+       cout<<re;
+    }
+
+
+
+
+}

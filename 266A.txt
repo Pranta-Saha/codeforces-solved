@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,i,j,cnt=0;
+    cin>>n;
+    char a,tmp;
+    cin>>a;
+    tmp=a;
+    for(i=0;i<n-1;i++){
+        cin>>a;
+        if(a==tmp) cnt++;
+        tmp=a;
+    }cout<<cnt;
+}

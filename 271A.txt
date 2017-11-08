@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int a,x,y,i,z,b;
+    cin>>a;
+    for(i=a+1;i<9015;i++){
+        b=i;
+        x=b%10;
+        b/=10;
+        y=b%10;
+        b/=10;
+        z=b%10;
+        b/=10;
+        if((x!=y)&&(x!=z)&&(x!=b)&&(y!=z)&&(y!=b)&&(z!=b)){cout<<i;break;}
+    }
+}

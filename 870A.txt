@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,m,a[10],b[10],i,x,y,r=0,j,s;
+
+    cin>>n>>m;
+
+    for(i=0;i<n;i++) cin>>a[i];
+    for(i=0;i<m;i++) cin>>b[i];
+
+    x=a[0];
+    for(i=1;i<n;i++){
+        if(x>a[i]) x=a[i];
+}
+    y=b[0];
+    for(i=1;i<m;i++){
+        if(y>b[i]) y=b[i];
+}
+
+
+
+for(i=0;i<n;i++){
+    for(j=0;j<i;j++){
+        if(a[i]<a[j]) swap(a[i],a[j]);
+
+    }
+   }
+   for(i=0;i<m;i++){
+    for(j=0;j<i;j++){
+        if(b[i]<b[j]) swap(b[i],b[j]);
+
+    }
+   }
+
+    for(i=0;i<n;i++){
+        for(j=0;j<m;j++){
+
+            if(a[i]==b[j]){
+                r=a[i];
+                goto level;
+            }
+         }
+    }
+
+
+
+
+ level : if(r!=0) {
+     r=a[i];
+    }else if(x>y){
+        r=(y*10)+x;
+
+    }else{
+        r=(x*10)+y;
+    }
+
+cout<<r;
+return 0;
+}

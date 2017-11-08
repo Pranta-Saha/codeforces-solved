@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,i,sf=0,fs=0;
+    string a;
+    cin>>n>>a;
+
+
+    for(i=0;i<(n-1);i++){
+        if((a[i]=='S')&&(a[i+1]=='F')) sf++;
+        if((a[i]=='F')&&(a[i+1]=='S')) fs++;
+
+
+    }
+
+
+    if(sf>fs) cout<<"YES";
+    else cout<<"NO";
+
+}

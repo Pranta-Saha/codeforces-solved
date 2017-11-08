@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int k,n,w,need,re;
+    cin>>k>>n>>w;
+
+    need=k*((w*(w+1))/2);
+
+    if(need<=n)cout<<"0";
+    else cout<<(need-n);
+
+
+
+}

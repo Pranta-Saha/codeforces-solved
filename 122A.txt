@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,m,a[100],x,y,z,cnt=0,ck=0,i,tmp;
+    cin>>n;
+
+    for(i=4;i<778;i++){
+      if( (i==4)||(i==7)|| (i==44)|| (i==47)|| (i==444)||(i==477)|| (i==744)|| (i==777)|| (i==747)||(i==447)|| (i==744)|| (i==774) || (i==474) ) a[cnt++]=i;
+
+    }
+
+     for(i=0;i<cnt;i++){
+        if(n%a[i]==0) ck=1;
+        //cout<<a[i]<<endl;
+     }
+
+    if(ck==1) cout<<"YES";
+    else cout<<"NO";
+
+}

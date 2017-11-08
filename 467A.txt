@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int cnt=0,i,x,y,n;
+    cin>>n;
+
+    for(i=0;i<n;i++){
+        cin>>x>>y;
+        if((y-x)>=2) cnt++;
+    }
+    cout<<cnt;
+
+    }

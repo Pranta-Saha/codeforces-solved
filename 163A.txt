@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int i,j,x,y,tmp,re;
+    for(i=1;i<=5;i++){
+       for(j=1;j<=5;j++){
+           cin>>tmp;
+           if(tmp==1){
+              x=i; y=j;
+           }
+    }
+}
+
+re=abs(3-x)+abs(3-y);
+cout<<re;
+}

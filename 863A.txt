@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    string a,b;
+    int i,j=0,c=0,cnt=0,c2,mid;
+    cin>>a;
+
+    while(a[++c]!='\0'){}
+
+    for(i=(c-1);i>=0;i--){
+        if(a[i]=='0') b[j++]='0';
+        else break;
+
+    }
+
+
+    for(i=0;i<c;i++){
+        b[j++]=a[i];
+    }
+
+    mid=j/2;
+    j--;
+
+    for(i=0;i<mid;i++){
+        if(b[i]==b[j-i]) cnt++;
+        else break;
+    }
+
+    if(cnt==mid) cout<<"YES";
+    else cout<<"NO";
+
+}
