@@ -1,2 +1,2 @@
 # codeforces-solved
-all solved problems of codeforces
+all solved problems of my codeforces solution
