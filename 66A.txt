@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    std::string a;
+    std::getline(std::cin,a);
+
+    if( a.size()<3 || ( a.size()==3 && a.compare("127")<=0 ) )cout<<"byte";
+    else if( a.size()<5 || ( a.size()==5 && a.compare("32767")<=0 ) )cout<<"short";
+    else if( a.size()<10 || ( a.size()==10 && a.compare("2147483647")<=0 ) )cout<<"int";
+    else if( a.size()<19 || ( a.size()==19 && a.compare("9223372036854775807")<=0 ) )cout<<"long";
+    else cout<<"BigInteger";
+
+}

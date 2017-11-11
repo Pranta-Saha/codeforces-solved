@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    char a[105],b[4]={'H','Q','9','+'},cn;
+    cin>>a;
+    int c,i;
+    c=strlen(a);
+
+    for(i=0;i<c;i++)
+    if(a[i]=='H'||a[i]== 'Q'||a[i]== '9' ){ cout<<"YES"; return 0; }
+
+    cout<<"NO";
+    return 0;
+}

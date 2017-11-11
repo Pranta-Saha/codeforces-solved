@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int mncnt(0),bit(0);
+    std::string a;
+
+    while(getline(std::cin,a)){
+        if(a[0]=='+') mncnt++;
+        else if(a[0]=='-') mncnt--;
+        else { bit+=mncnt*( a.size()-a.find(':') -1);  }
+
+    }
+
+    std::cout<<bit;
+
+
+}
