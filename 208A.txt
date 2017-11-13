@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    char a[202],b[3]={'W','U','B'};
+    cin>>a;
+
+    int n,i,cnt=0;
+    n=strlen(a);
+
+
+    for(i=0;i<n;i++){
+        if(a[i]=='W'&&a[i+1]=='U'&&a[i+2]=='B') {cout<<" "; i+=2;}
+        else {cnt++; if(cnt==1)cout<<"\n"; cout<<a[i];}
+    }
+
+}

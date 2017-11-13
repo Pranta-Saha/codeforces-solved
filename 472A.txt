@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool pa[1000000];
+
+int main(){
+    int n,i,j,tmp;
+    cin>>n;
+
+    if(n%2==0){ cout<<"4 "<<(n-4);return 0;}
+
+    if(n>500){
+
+    int sqr=sqrt(n);
+    for(i=1;i<sqr;i++){
+        for(j=2;j<=i;j++){
+            if(i%j==0)
+            break;
+        }
+        if(i==j) pa[i]=true;
+    }
+
+    for(i=4;i<sqr;i++){
+        tmp=n-i;
+        if( pa[i]==0 && (tmp%2==0||tmp%3==0||tmp%5==0||tmp%7==0) ){ cout<<i<<" "<<tmp; return 0; }
+    }
+    }else {
+
+    for(i=1;i<=n;i++){
+        for(j=2;j<=i;j++){
+            if(i%j==0)
+            break;
+        }
+        if(i==j) pa[i]=true;
+    }
+
+    for(i=4;i<=n;i++){
+        tmp=n-i;
+        if( pa[i]==0 && pa[tmp]==0 ){ cout<<i<<" "<<tmp; return 0; }
+    }
+
+    }
+}

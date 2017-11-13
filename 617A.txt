@@ -1,0 +1,11 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,cnt=0;
+    cin>>n;
+    cnt=n/5;
+    n=n%5;
+    if(n!=0)cout<<(cnt+1);
+    else cout<<cnt;
+}

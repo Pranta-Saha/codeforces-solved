@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n,i,cnt=1,tmp,tmp2;
+    cin>>n;
+    cin>>tmp;
+    for(i=0;i<n-1;i++){
+        tmp2=tmp; cin>>tmp;
+        if(tmp!=tmp2) cnt++;
+    }
+
+    cout<<cnt;
+    return 0;
+
+}
