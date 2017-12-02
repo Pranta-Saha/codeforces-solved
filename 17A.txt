@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,k,i,a[200],c=-1,j,cnt=0;
+    cin>>n>>k;
+
+    for(i=1;i<=n;i++){
+        for(j=2;j<=i;j++){
+            if(i%j==0)
+            break;
+        }
+        if(i==j)
+          a[++c]=i;
+    }
+
+    for(i=0;i<=c;i++){
+        for(j=0;j<=i;j++){
+            if((1+a[j]+a[j+1])==a[i]) cnt++;
+
+        }
+    }
+
+   if(cnt>=k) cout<<"YES";
+   else cout<<"NO";
+
+
+}

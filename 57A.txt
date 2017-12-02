@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int n,ax,ay,bx,by,d1,d2,d=0;
+    cin>>n>>ax>>ay>>bx>>by;
+
+    if((ay==0)&&(by==0)){
+        d=abs(ax-bx);
+    }else if((bx==n)&&(ay==0)){
+        d=by+n-ax;
+    }else if((ay==0)&&(by==n)){
+        d1=n-ax+n+n-bx;
+        d2=ax+n+bx;
+        d=min(d1,d2);
+    }else if((ay==0)&&(bx==0)){
+        d=ax+by;
+    }else if((ax==n)&&(bx==n)){
+        d=abs(by-ay);
+    }else if((ax==n)&&(by==n)){
+        d=n-ay+n-bx;
+    }else if((ax==n)&&(bx==0)){
+        d1=n-ay+n+n-by;
+        d2=ay+n+by;
+        d=min(d1,d2);
+    }else if((ay==n)&(by==n)){
+        d=abs(bx-ax);
+    }else if((ay==n)&&(bx==0)){
+        d=ax+n-by;
+    }else if((ax==0)&&(bx==0)){
+        d=abs(ay-by);
+    }else{
+        swap(ax,bx);
+        swap(ay,by);
+        if((ay==0)&&(by==0)){
+        d=abs(ax-bx);
+    }else if((bx==n)&&(ay==0)){
+        d=by+n-ax;
+    }else if((ay==0)&&(by==n)){
+        d1=n-ax+n+n-bx;
+        d2=ax+n+bx;
+        d=min(d1,d2);
+    }else if((ay==0)&&(bx==0)){
+        d=ax+by;
+    }else if((ax==n)&&(bx==n)){
+        d=abs(by-ay);
+    }else if((ax==n)&&(by==n)){
+        d=n-ay+n-bx;
+    }else if((ax==n)&&(bx==0)){
+        d1=n-ay+n+n-by;
+        d2=ay+n+by;
+        d=min(d1,d2);
+    }else if((ay==n)&(by==n)){
+        d=abs(bx-ax);
+    }else if((ay==n)&&(bx==0)){
+        d=ax+n-by;
+    }else if((ax==0)&&(bx==0)){
+        d=abs(ay-by);
+    }
+
+
+    }
+
+    cout<<d;
+}

@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int y,w,z,m,d=6,i;
+    cin>>y>>w;
+
+    z=max(y,w);
+    m=7-z;
+
+    for(i=6;i>0;i--){
+        if(((m%i)==0)&&((6%i)==0)){
+            m=m/i;
+            d=d/i;
+            break;
+        }
+
+    }
+
+
+    cout<<m<<"/"<<d;
+
+
+}
+

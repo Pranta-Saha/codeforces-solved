@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool arr[369];
+main(){
+    int n,k,c,tmp,cnt(0),i,j,gift(0);
+    cin>>n>>k>>c;
+    gift=c;
+
+    for(i=0;i<c;i++) {
+        cin>>tmp;
+        arr[tmp]=true;
+    }
+
+    for(i=1;i<=n;i++){
+        if(arr[i]==0) {
+            cnt++;
+        }else {cnt=0; continue;}
+
+        if(cnt==k){
+            gift++;
+            cnt=0;
+
+        }
+    }
+
+    cout<<gift;
+
+}

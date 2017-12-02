@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    unsigned long long n,d,tmp1,tmp2,cnt(0),extra_tmp;
+    cin>>n>>d>>tmp1;
+
+    for(int i=1;i<n;i++){
+        cin>>tmp2;
+
+        if(tmp1>=tmp2){
+            extra_tmp = (tmp1-tmp2)/d +1;
+            cnt+=extra_tmp;
+            tmp1=tmp2 + extra_tmp*d;
+        }else tmp1=tmp2;
+    }
+
+    cout<<cnt;
+
+}

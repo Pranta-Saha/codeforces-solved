@@ -1,19 +1,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-main(){
-    int i,a[100],n,re=0;
+int main(){
+    int n,i=1,tmp=0;
     cin>>n;
-
-    for(i=1;i<=31;i++){
-        if(n==((i*(i+1))/2)){
-            cout<<"YES";
-            i=35;
-        }else re++;
-
+    while(tmp<=n){
+        tmp=((i*(i+1))/2);
+        if(tmp==n){ cout<<"YES"; return 0;  }
+        i++;
     }
 
-
-    if(re==31) cout<<"NO";
-
+    cout<<"NO";
+    return 0;
 }

@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+    int a,i,ar[10000],x,y,b,z=0,in,tmp;
+    for(i=0;i<10000;i++) ar[i]=0;
+    cin>>a;
+
+
+    for(i=2;i<=(a-1);i++){
+        b=a;
+        while(b!=0){
+            tmp=b%i;
+            ar[i]=ar[i]+tmp;
+            b=b/i;
+
+        }
+    }
+
+   for(i=2;i<=(a-1);i++){
+       z=z+ar[i];
+   }
+
+x=z;
+y=(a-2);
+
+
+for(i=x;i>0;i--){
+
+    if(((x%i)==0)&&((y%i)==0)){
+    x=x/i;
+    y=y/i;
+    break;
+
+}
+}
+
+cout<<x<<"/"<<y;
+}
