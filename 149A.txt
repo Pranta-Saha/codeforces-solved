@@ -1,0 +1,26 @@
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int sortfunction(int x, int y){
+         return(x>y);
+     }
+
+int main(){
+    int k,a[13],i,grouth(0); a[0]=-1;
+    cin>>k;
+    if(k==0){ cout<<"0"; return 0;}
+
+    for(i=0;i<12;i++) cin>>a[i];
+
+    sort(a,a+12,sortfunction);
+
+    for(i=0;i<12;i++) {
+        grouth +=a[i];
+        if(grouth>=k){cout<<i+1; return 0;}
+    }
+
+    cout<<"-1";
+    return 0;
+}

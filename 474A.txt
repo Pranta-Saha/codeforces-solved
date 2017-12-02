@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    char ck;
+    string a, key[3];
+    cin>>ck>>a;
+    key[0]="qwertyuiop";
+    key[1]="asdfghjkl;";
+    key[2]="zxcvbnm,./";
+
+
+    int i,j, strln=a.size();
+
+       if(ck=='R'){
+        for(int indx=0; indx<strln; indx++)
+            for(i=0;i<3;i++)
+               for(j=0;j<10;j++)
+                 if(key[i][j]==a[indx]) cout<<key[i][j-1];
+
+        }else{
+           for(int indx=0; indx<strln; indx++)
+            for(i=0;i<3;i++)
+               for(j=0;j<10;j++)
+                 if(key[i][j]==a[indx]) cout<<key[i][j+1];
+
+        }
+
+}
