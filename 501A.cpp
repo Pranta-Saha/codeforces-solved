@@ -3,15 +3,38 @@ using namespace std;
 
 int main()
 {
-    int a,b,c,d,apoint,bpoint;
-    cin>>a>>b>>c>>d;
+    int n,i,j;
+    map<string,string > key_value,value_key;
+    map<string,string >::iterator it;
 
-    apoint=max(((3*a)/10), (a-((a*c)/250)) );
-    bpoint=max(((3*b)/10), (b-((b*d)/250)) );
+    cin>>n;
+    string str,str2;
 
-    if(apoint>bpoint) cout<<"Misha";
-    else if(apoint<bpoint) cout<<"Vasya";
-    else cout<<"Tie";
+    while(n--)
+    {
+        cin>>str>>str2;
+        if(value_key.find(str)!=value_key.end())
+        {
+            key_value[value_key[str]]=str2;
+            value_key[str2]=value_key[str];
+            value_key.erase(str);
+        }
+        else
+        {
+            key_value[str]=str2;
+            value_key[str2]=str;
+        }
+    }
 
-    return 0;
+    cout<<key_value.size()<<endl;
+
+    while(!key_value.empty())
+    {
+        it=key_value.begin();
+        cout<<it->first<<" "<<it->second<<endl;
+        key_value.erase(it);
+    }
+
+	return 0;
 }
+
