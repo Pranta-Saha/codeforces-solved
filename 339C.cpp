@@ -38,6 +38,7 @@ inline int toInt(string s) { int v; istringstream sin(s); sin >> v; return v; }
 inline void bin(ll n){if (n > 1)bin(n>>1); cout<<(n&1);}
 inline int binlen(ll x) { if(x==0) return 1; return floor(log2(double(x)))+1;}
 #define FRO freopen("in.txt","r",stdin);
+#define oFRO freopen("out.txt","w",stdout);
 #define DEBUG(args...) do {cerr<<#args<<' '; print(args);} while(0);cerr<<endl;
 template<typename T> void print(const T& v){cerr<<v<<' ';}
 template<typename T1,typename... T2>
@@ -53,31 +54,31 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
+        string str;
+        int n,m,j;
+        stack<int>stk;
+        bool go(int cnt, int dif, int last_used )
         {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
+                if(cnt==m){cout<<"YES"<<endl; return 1;}
+                if(cnt>m) return 0;
+                for(int i=dif+1;i<=10;i++)
                 {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
+                        if(str[i]=='0' || i==last_used) continue;
+                        if(go(cnt+1,i-dif,i)){stk.push(i); return 1; }
                 }
-                return dp[total][is_valid]=sum;
+                return 0;
         }
-
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>str>>m; str="0"+str;
+                if( go(0,0,0)==0) cout<<"NO";
+                else
+                {
+                        while(!stk.empty()){cout<<stk.top()<<' '; stk.pop();}
+                }
         }
 };
 
@@ -90,6 +91,18 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

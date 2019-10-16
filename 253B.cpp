@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -37,7 +38,8 @@ inline int toInt(string s) { int v; istringstream sin(s); sin >> v; return v; }
 #define bitcount(a) __builtin_popcountll((a))
 inline void bin(ll n){if (n > 1)bin(n>>1); cout<<(n&1);}
 inline int binlen(ll x) { if(x==0) return 1; return floor(log2(double(x)))+1;}
-#define FRO freopen("in.txt","r",stdin);
+#define FRO freopen("input.txt","r",stdin);
+#define oFRO freopen("output.txt","w",stdout);
 #define DEBUG(args...) do {cerr<<#args<<' '; print(args);} while(0);cerr<<endl;
 template<typename T> void print(const T& v){cerr<<v<<' ';}
 template<typename T1,typename... T2>
@@ -53,43 +55,55 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+vector<int>arr(5003,0);
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        int n,m,i,j;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>n;
+                for(i=0;i<n;i++)
+                {
+                        cin>>j;
+                        arr[j]++;
+                }
+                int mx=INT_MIN;
+                for(i=1;i<=5000;i++)
+                {
+                        if(i*2>5000) break;
+                        int cnt=0;
+                        for(j=i;j<=2*i;j++)
+                        {
+                                cnt+=arr[j];
+                        }
+                        mx=max(cnt,mx);
+                }
+                cout<<n-mx;
         }
 };
 
 
 int main()
 {
+        FRO
+        oFRO
         ios::sync_with_stdio(0);
+
         cin.tie(0);
         solution ob;
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

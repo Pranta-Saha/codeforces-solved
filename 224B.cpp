@@ -1,18 +1,47 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
 #define pb(x) push_back(x)
 #define memset0(x) memset((x), 0, sizeof(x))
 #define memsetM1(x) memset((x), -1, sizeof(x))
+
+#define F first
+#define S second
 typedef long long ll;
 typedef unsigned long long ull;
 typedef pair<int,int> pii;
 typedef tuple<int, int, int> Tiii;
 #define UNIQUE(v) (v).erase(unique((v).begin(), (v).end()), (v).end());
 #define all(x) (x).begin(), (x).end()
-#define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
 #define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
+
+#define SQ(x) ((x)*(x))
+#define issq(x) (((ll)(sqrt((x))))*((ll)(sqrt((x))))==(x))
+#define mem(a,x) memset(a,x,sizeof(a))
+#define inf 1e18
+#define lg(r,n) (int)(log2(n)/log2(r))
+#define fast ios_base::sync_with_stdio(false)
+#define one(x) __builtin_popcount(x)
+
+//#define iceil(n, x) (((n) + (x) - 1) / (x))
+//return the minimum number >=n , which is divisible by x
+//int next_popcount(int n){int c = (n & -n);int r = n+c;int p = r^n;int x = (p>>2)/c;return x  r;}
+// Let, n e k ti onBit ache, this func return a serial combination of k onBit.
+
+//struct BIT{
+//    vector<ll> Tree;ll Size=0;void init(int n){Tree.assign(n+1,0);Size=n;}
+//    void update(int indx,ll val){while(indx<=n){Tree[indx] += val;indx += (indx)&(-indx);}}
+//    ll query(int indx){ll sum=0;while(indx>0)
+//        {sum += Tree[indx];sum %= mod;indx -= (indx)&(-indx);}return sum;}
+//    ll query(int l, int r){return (query(r) - query(l-1)+mod)%mod;}
+//};
+//ll bigmod(ll a, ll b){if(b==0) return 1%mod;ll x = bigmod(a,b/2);
+//    x = (x*x)%mod;if(b%2==1) x = (x*a)%mod;return x;}
+//ll egcd(ll a, ll b, ll &x, ll &y){if(a==0){x=0;y=1;return b;}
+//    ll x1,y1;ll d =egcd(b%a, a,x1,y1);x = y1-(b/a)*x1;y=x1;return d;}
+
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -38,6 +67,7 @@ inline int toInt(string s) { int v; istringstream sin(s); sin >> v; return v; }
 inline void bin(ll n){if (n > 1)bin(n>>1); cout<<(n&1);}
 inline int binlen(ll x) { if(x==0) return 1; return floor(log2(double(x)))+1;}
 #define FRO freopen("in.txt","r",stdin);
+#define oFRO freopen("out.txt","w",stdout);
 #define DEBUG(args...) do {cerr<<#args<<' '; print(args);} while(0);cerr<<endl;
 template<typename T> void print(const T& v){cerr<<v<<' ';}
 template<typename T1,typename... T2>
@@ -49,36 +79,40 @@ template<class T,class...Ts>void MIN(T&x,const Ts&...xs){x=_min(x,xs...);}templa
 #define min(...) _min(__VA_ARGS__)
 #define max(...) _max(__VA_ARGS__)
 
+//bool chkbnd(int i,int j) {return 0<=i && i<n && 0<=j && j<m;}
+
 ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
+int arr[100005];
+set<int>st,st2;
 
-ll dp[101][2];
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        int n,m,i,k,j;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>n>>k;
+                for(i=1;i<=n;i++)
+                {
+                        cin>>arr[i];
+                        st.insert(arr[i]);
+                        if(st.size()==k)
+                        {
+                                int lft=i;
+                                while(st2.size()!=k)
+                                {
+                                        st2.insert(arr[lft--]);
+                                }
+                                cout<<lft+1<<' '<<i<<endl;
+                        return;
+                        }
+
+
+                }
+                cout<<-1<<' '<<-1;
         }
+        ///---->make all int ll must<----
 };
 
 
@@ -90,6 +124,18 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

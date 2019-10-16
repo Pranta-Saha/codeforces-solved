@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,7 +13,6 @@ typedef tuple<int, int, int> Tiii;
 #define all(x) (x).begin(), (x).end()
 #define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
-#define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -53,31 +53,63 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
+        int i,j;
 
-        ll go(ll total, bool is_valid)
+
+        pii job(int n, int m, bool start_form_red)
         {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
+                int petya=0,vasya=0,total;
+                total=n+m;
+                ///0 for m/red, 1 for n/black
+                vector<bool>vec;
+                if(start_form_red) {vec.pb(0); m--;}
+                else {vec.pb(1); n--;}
+                bool term=1; ///0 for petya, 1 for vasya
+
+                while(n || m)
                 {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
+                        if(n==0)
+                        {
+                                vec.pb(0);
+                                m--;
+                        }
+                        else if(m==0)
+                        {
+                                vec.pb(1);
+                                n--;
+                        }
+                        else
+                        {
+                                if(term)
+                                {
+                                        if(vec.back()==1) {vec.pb(0); m--;}
+                                        else {vec.pb(1); n--;}
+                                }else
+                                {
+                                        if(vec.back()==1) {vec.pb(1); n--;}
+                                        else {vec.pb(0); m--;}
+                                }
+                        }
+                        term^=1;
                 }
-                return dp[total][is_valid]=sum;
+                for(i=1;i<total; i++)
+                {
+                        if(vec[i-1]==vec[i]) petya++;
+                        else vasya++;
+                }
+                return {petya,vasya};
         }
 
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                int n,m;
+                cin>>n>>m;
+                pii tmp=job(n,m,0), tmp2= job(n,m,1);
+                if(tmp.first>tmp2.first) cout<<tmp.first<<' '<<tmp.second;
+                else cout<<tmp2.first<<' '<<tmp2.second;
         }
 };
 
@@ -90,6 +122,7 @@ int main()
         ob.solve();
 	return 0;
 }
+
 
 
 

@@ -12,7 +12,6 @@ typedef tuple<int, int, int> Tiii;
 #define all(x) (x).begin(), (x).end()
 #define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
-#define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -53,31 +52,54 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
+        int i,j;
 
-        ll go(ll total, bool is_valid)
+        inline int cheak(int x, int y, int a, int b, int c)
         {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
+                int z;
+                if(x*y==a)
                 {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
+                      if(b%y==0)
+                      {
+                              z=b/y;
+                              if(z*x==c) return z;
+                      }
+                      if(c%y==0)
+                      {
+                              z=c/y;
+                              if(z*x==b) return z;
+                      }
                 }
-                return dp[total][is_valid]=sum;
-        }
+                return -1;
 
+        }
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                int a,b,c,tmp;
+                cin>>a>>b>>c;
+                for(i=1;i<10001;i++)
+                {
+                        for(j=1;j<10001;j++)
+                        {
+                                tmp=cheak(i,j,a,b,c);
+                                if(tmp!=-1) {cout<<(i+j+tmp)*4; return ;}
+                                tmp=cheak(i,j,b,a,c);
+                                if(tmp!=-1) {cout<<(i+j+tmp)*4; return ;}
+                                tmp=cheak(i,j,c,a,b);
+                                if(tmp!=-1) {cout<<(i+j+tmp)*4; return ;}
+                        }
+                }
+        }
+        void mini_solution()
+        {
+                int a,b,c;
+                cin>>a>>b>>c;
+                int x=sqrt(a*b/c);
+                cout<<(x+a/x+b/x)*4;
+                return;
         }
 };
 
@@ -87,9 +109,11 @@ int main()
         ios::sync_with_stdio(0);
         cin.tie(0);
         solution ob;
-        ob.solve();
+        ob.mini_solution();
 	return 0;
 }
+
+
 
 
 

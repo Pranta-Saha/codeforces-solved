@@ -12,7 +12,6 @@ typedef tuple<int, int, int> Tiii;
 #define all(x) (x).begin(), (x).end()
 #define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
-#define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -53,31 +52,59 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+string str[502];
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        int n,m,i,j,h,w;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>h>>w;
+                for(i=0;i<h;i++)
+                {
+                        cin>>str[i];
+                }
+                int ci=-1,cj=-1;
+                for(i=1;i<h-1;i++)
+                {
+                        for(j=1;j<w-1;j++)
+                        {
+                                if(str[i][j]=='*'&&str[i-1][j]=='*'&&str[i][j-1]=='*'&&str[i+1][j]=='*'&&str[i][j+1]=='*')
+                                {
+                                        ci=i;
+                                        cj=j;
+                                        break;
+                                }
+                        }
+                }
+                if(ci==-1 ||cj==-1) {cout<<"NO"; return;}
+                //DEBUG(ci,cj);
+                for(i=ci;i>=0&&str[i][cj]=='*';i--) str[i][cj]='#';
+                for(i=ci+1;i<h&& str[i][cj]=='*'; i++) str[i][cj]='#';
+                for(j=cj-1;j>=0&&str[ci][j]=='*';j--) str[ci][j]='#';
+                for(j=cj+1;j<w&&str[ci][j]=='*';j++) str[ci][j]='#';
+
+//                for(i=0;i<h;i++)
+//                {
+//                        for(j=0;j<w;j++)
+//                        {
+//                                cout<<str[i][j];
+//                        }cout<<endl;
+//                }
+                for(i=0;i<h;i++)
+                {
+                        for(j=0;j<w;j++)
+                        {
+                                if(str[i][j]=='*')
+                                {
+                                        cout<<"NO";
+                                        return;
+                                }
+                        }
+                }
+                if(ci==-1 || cj==-1 || ci==0 || ci==h-1 || cj==0 || cj==w-1 ) cout<<"NO";
+                else cout<<"YES";
+
+
         }
 };
 
@@ -90,6 +117,15 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
 
 
 

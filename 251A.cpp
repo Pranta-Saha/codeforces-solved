@@ -12,7 +12,6 @@ typedef tuple<int, int, int> Tiii;
 #define all(x) (x).begin(), (x).end()
 #define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
-#define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -53,31 +52,33 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        ll n,m,i,j,d;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                ll arr[100000],cnt=0;
+                cin>>n>>d;
+                for(i=0;i<n;i++)
+                        cin>>arr[i];
+                ll lo=0, hi=2;
+                while(lo+2<n && hi<n)
+                {
+                        if(!(lo+2<=hi)) {hi++; continue;}
+                        if(arr[hi]-arr[lo]<=d)
+                        {
+                                ll tmp=hi-lo-1;
+                                cnt+=(tmp*hi - tmp - tmp*lo - (tmp*(tmp-1))/2 );
+                                if(hi+1==n) break;
+                                hi++;
+                        }
+                        while((lo+2<=hi)&& arr[hi]-arr[lo]>d)
+                        {
+                                lo++;
+                        }
+                }
+                cout<<cnt;
         }
 };
 
@@ -90,6 +91,9 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
 
 
 

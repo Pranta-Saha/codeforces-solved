@@ -12,7 +12,6 @@ typedef tuple<int, int, int> Tiii;
 #define all(x) (x).begin(), (x).end()
 #define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
-#define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -53,31 +52,39 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
+        int n,m,i,j;
+        class data{
+        public:
+                int l,r,indx;
+                data(int a, int b,int indxx){l=a; r=b; indx=indxx;}
 
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
+                bool operator<(data b)
                 {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
+                        if(l==b.l) return r>b.r;
+                        return l<b.l;
                 }
-                return dp[total][is_valid]=sum;
-        }
+        };
 
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>n;
+                vector<data>vec;
+                int u,v,lft=INT_MAX,rght=INT_MIN;
+                for(i=1;i<=n;i++)
+                {
+                        cin>>u>>v;
+                        lft=min(lft,u);
+                        rght=max(rght,v);
+                        vec.pb(data(u,v,i));
+                }
+                sort(all(vec));
+                if(vec[0].l==lft && vec[0].r==rght)
+                        cout<<vec[0].indx;
+                else
+                        cout<<-1;
         }
 };
 
@@ -90,6 +97,18 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

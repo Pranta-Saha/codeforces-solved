@@ -14,6 +14,32 @@ typedef tuple<int, int, int> Tiii;
 #define precise(a) fixed<<setprecision(a)
 #define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
+#define SQ(x) ((x)*(x))
+#define issq(x) (((ll)(sqrt((x))))*((ll)(sqrt((x))))==(x))
+#define mem(a,x) memset(a,x,sizeof(a))
+#define inf 1e18
+#define lg(r,n) (int)(log2(n)/log2(r))
+#define fast ios_base::sync_with_stdio(false)
+#define one(x) __builtin_popcount(x)
+
+//#define iceil(n, x) (((n) + (x) - 1) / (x))
+//return the minimum number >=n , which is divisible by x
+//int next_popcount(int n){int c = (n & -n);int r = n+c;int p = r^n;int x = (p>>2)/c;return x  r;}
+// Let, n e k ti onBit ache, this func return a serial combination of k onBit.
+
+//struct BIT{
+//    vector<ll> Tree;ll Size=0;void init(int n){Tree.assign(n+1,0);Size=n;}
+//    void update(int indx,ll val){while(indx<=n){Tree[indx] += val;indx += (indx)&(-indx);}}
+//    ll query(int indx){ll sum=0;while(indx>0)
+//        {sum += Tree[indx];sum %= mod;indx -= (indx)&(-indx);}return sum;}
+//    ll query(int l, int r){return (query(r) - query(l-1)+mod)%mod;}
+//};
+//ll bigmod(ll a, ll b){if(b==0) return 1%mod;ll x = bigmod(a,b/2);
+//    x = (x*x)%mod;if(b%2==1) x = (x*a)%mod;return x;}
+//ll egcd(ll a, ll b, ll &x, ll &y){if(a==0){x=0;y=1;return b;}
+//    ll x1,y1;ll d =egcd(b%a, a,x1,y1);x = y1-(b/a)*x1;y=x1;return d;}
+
+
 //have to check;
 #define lcase(a) (char)tolower(a)
 #define ucase(a) (char)toupper(a)
@@ -38,6 +64,7 @@ inline int toInt(string s) { int v; istringstream sin(s); sin >> v; return v; }
 inline void bin(ll n){if (n > 1)bin(n>>1); cout<<(n&1);}
 inline int binlen(ll x) { if(x==0) return 1; return floor(log2(double(x)))+1;}
 #define FRO freopen("in.txt","r",stdin);
+#define oFRO freopen("out.txt","w",stdout);
 #define DEBUG(args...) do {cerr<<#args<<' '; print(args);} while(0);cerr<<endl;
 template<typename T> void print(const T& v){cerr<<v<<' ';}
 template<typename T1,typename... T2>
@@ -52,32 +79,48 @@ template<class T,class...Ts>void MIN(T&x,const Ts&...xs){x=_min(x,xs...);}templa
 ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
-
-ll dp[101][2];
+ll a[2003],f[2003];
+vector<ll>adj[2003];
+bool visited[2003];
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
+        ll n,m,i,j,d,ans=0;
+        ll mod=(ll)(1e9)+7;
+        void DFS(ll v, ll root)
         {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
+                visited[v]=1;
+                f[v]=1;
+                for(auto child: adj[v])
                 {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
+                        if(visited[child]==1) continue;
+                        if(a[child]<a[root] || a[child]>a[root]+d ) continue;
+                        if(a[child]==a[root] && child<root) continue;
+                        DFS(child,root);
+                        f[v]=(f[v]*(f[child]+1))%mod;
                 }
-                return dp[total][is_valid]=sum;
         }
 
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>d>>n;
+                ll u,v;
+                for(i=1;i<=n;i++)
+                        cin>>a[i];
+
+                for(i=1;i<n;i++)
+                {
+                        cin>>u>>v;
+                        adj[u].push_back(v);
+                        adj[v].push_back(u);
+                }
+                for(i=1;i<=n;i++)
+                {
+                        for(j=1;j<=n;j++){f[j]=0; visited[j]=0; }
+                        DFS(i,i);
+                        ans+=f[i];
+                        ans%=mod;
+                }
+                cout<<ans;
         }
 };
 
@@ -90,6 +133,18 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

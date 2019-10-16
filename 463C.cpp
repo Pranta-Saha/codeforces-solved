@@ -7,12 +7,11 @@ using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef pair<int,int> pii;
-typedef tuple<int, int, int> Tiii;
+typedef tuple<ll, ll, ll> Tiii;
 #define UNIQUE(v) (v).erase(unique((v).begin(), (v).end()), (v).end());
 #define all(x) (x).begin(), (x).end()
 #define chkbnd(i,j) 0<=i && i<n && 0<=j && j<m
 #define precise(a) fixed<<setprecision(a)
-#define isvowel(c) c=='a' || c=='e' || c=='i' || c=='o' || c=='u'
 
 //have to check;
 #define lcase(a) (char)tolower(a)
@@ -53,31 +52,56 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+ll grid[2003][2003];
+ll up[4003];
+ll down[4003];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        ll n,m,i,j,l,k,sum,tmp;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>n;
+                for(i=1;i<=n;i++)
+                {
+                        for(j=1;j<=n;j++)
+                        {
+                                cin>>grid[i][j];
+                                up[i+j]+=grid[i][j];
+                                down[n+i-j]+=grid[i][j];
+                        }
+                }
+
+                Tiii black, white;
+                get<0>(black)=-1;
+                get<0>(white)=-1;
+                for(i=1;i<=n;i++)
+                {
+                        for(j=1;j<=n;j++)
+                        {
+                                tmp = down[n+i-j]+up[i+j]-grid[i][j];
+                                if( (i+j)%2==0 )
+                                {
+                                        if(get<0>(white) < tmp )
+                                        {
+                                                get<0>(white)=tmp;
+                                                get<1>(white)=i;
+                                                get<2>(white)=j;
+                                        }
+                                }
+                                else
+                                {
+                                        if(get<0>(black) < tmp)
+                                        {
+                                                get<0>(black)=tmp;
+                                                get<1>(black)=i;
+                                                get<2>(black)=j;
+                                        }
+                                }
+                        }
+                }
+                cout<<get<0>(black)+get<0>(white)<<endl;
+                cout<<get<1>(black)<<' '<<get<2>(black)<<' '<<get<1>(white)<<' '<<get<2>(white)<<endl;
         }
 };
 
@@ -90,6 +114,18 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

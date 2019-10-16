@@ -38,6 +38,7 @@ inline int toInt(string s) { int v; istringstream sin(s); sin >> v; return v; }
 inline void bin(ll n){if (n > 1)bin(n>>1); cout<<(n&1);}
 inline int binlen(ll x) { if(x==0) return 1; return floor(log2(double(x)))+1;}
 #define FRO freopen("in.txt","r",stdin);
+#define oFRO freopen("out.txt","w",stdout);
 #define DEBUG(args...) do {cerr<<#args<<' '; print(args);} while(0);cerr<<endl;
 template<typename T> void print(const T& v){cerr<<v<<' ';}
 template<typename T1,typename... T2>
@@ -51,33 +52,79 @@ template<class T,class...Ts>void MIN(T&x,const Ts&...xs){x=_min(x,xs...);}templa
 
 ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
+typedef tuple<ll,char,char,char> data;
 
 
-ll dp[101][2];
+string grid[1003];
+ll up[1003][1003];
+ll down[1003][1003];
+data record[1003][1003];
+bool flag[1003][1003];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        ll n,m,i,j;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                cin>>n>>m;
+                for(i=0;i<n;i++)
+
+                        cin>>grid[i];
+
+                for(j=0;j<m;j++)
+                {
+                        down[n-1][j]=1;
+                        for(i=n-2;i>=0;i--)
+                        {
+                                if(grid[i][j]==grid[i+1][j]) down[i][j]=down[i+1][j]+1;
+                                else down[i][j]=1;
+                        }
+                }
+                for(j=0;j<m;j++)
+                {
+                        up[0][j]=1;
+                        for(i=1;i<n;i++)
+                        {
+                                if(grid[i][j]==grid[i-1][j]) up[i][j]=up[i-1][j]+1;
+                                else up[i][j]=1;
+                        }
+                }
+
+
+                for(j=0;j<m;j++)
+                {
+                        for(i=1;i<n;i++)
+                        {
+                                if(up[i][j]!=1) continue;
+                                ll dwn_indx = i + down[i][j];
+                                if(dwn_indx>=n) break;
+                                if(down[i][j]>up[i-1][j] || down[i][j]>down[dwn_indx][j]) continue;
+                                flag[i][j]=1;
+                                record[i][j]=make_tuple(down[i][j],grid[i-1][j],grid[i][j],grid[dwn_indx][j]);
+                        }
+                }
+                ll ans=0;
+                for(i=0;i<n;i++)
+                {
+                        if(flag[i][0]==1) ans++;
+                        ll occarence=1;
+                        for(j=1;j<m;j++)
+                        {
+                                if(flag[i][j]==1)
+                                {
+                                        if(flag[i][j-1]==1 && record[i][j]==record[i][j-1] )
+                                        {
+                                                occarence++;
+                                                ans+=occarence;
+                                        }else
+                                        {
+                                                occarence=1;
+                                                ans+=1;
+                                        }
+                                }else occarence=1;
+                        }
+                }
+                cout<<ans;
         }
 };
 
@@ -90,6 +137,7 @@ int main()
         ob.solve();
 	return 0;
 }
+
 
 
 

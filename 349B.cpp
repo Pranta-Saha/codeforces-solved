@@ -53,35 +53,33 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        int n,m,i,j,v;
+        int aaa[10];
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                int num_of_digit,main_digit,mn=INT_MAX;
+                cin>>v;
+                for(i=1;i<=9;i++)
+                {
+                        cin>>aaa[i];
+                        if(aaa[i]<mn) {mn=aaa[i]; main_digit=i;}
+                }
+                num_of_digit=v/mn;
+                if(num_of_digit==0)  {cout<<-1; return;}
+                int remain=v-(num_of_digit*aaa[main_digit]);
+                for(i=0;i<num_of_digit;i++)
+                {
+                        for(j=9;j>=main_digit;j--)
+                        {
+                                int requeird=aaa[j]-aaa[main_digit];
+                                if(remain>=requeird) { cout<<j; remain-=requeird; break;}
+                        }
+                }
         }
 };
-
-
 int main()
 {
         ios::sync_with_stdio(0);
@@ -90,6 +88,14 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
 
 
 

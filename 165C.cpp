@@ -53,31 +53,58 @@ ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
 // ==============================================================================================
 
 
-ll dp[101][2];
+
 class solution{
 public:
-        ll k,d,n,mod=1e9+7;
-
-        ll go(ll total, bool is_valid)
-        {
-                if(dp[total][is_valid]!=-1) return dp[total][is_valid];
-                if(total==n) { return (is_valid==1)?1:0;}
-                ll sum=0;
-                for(ll i=1;i<=k;i++)
-                {
-                        if(total+i>n) break;
-                        if(i>=d) sum+=go(total+i,1);
-                        else sum+=go(total+i,is_valid);
-                        sum%=mod;
-                }
-                return dp[total][is_valid]=sum;
-        }
-
+        ll n,m,i,j,k;
+        vector<ll>left,right;
         void solve()
         {
-                cin>>n>>k>>d;
-                for(int i=0;i<=100;i++) dp[i][0]=dp[i][1]=-1;
-                cout<<go(0,0);
+                string str;
+                cin>>k>>str;
+                ll len=str.size();
+                left.resize(len,0);
+                right.resize(len,0);
+                ll ans=0, cnt=0;
+                for(i=0;i<len;i++)
+                {
+                        if(str[i]=='0') cnt++;
+                        else
+                        {
+                                if(k==0)
+                                {
+                                        ans+=(cnt*(cnt+1))/2;
+                                }
+                                left[i]=cnt; cnt=0;
+                        }
+                }
+                if(k==0) {ans+=(cnt*(cnt+1))/2; cout<<ans; return;}
+                cnt=0;
+                for(i=len-1;i>=0;i--)
+                {
+                        if(str[i]=='0') cnt++;
+                        else {right[i]=cnt; cnt=0;}
+                }
+                ll lft=0, rght=0,total_one=0;
+                for(i=0;i<len;i++)if(str[i]=='1'){lft=i; rght=i; total_one=1; break;}
+
+                while(lft<len && rght<len)
+                {
+
+                        while(total_one<k)
+                        {
+                                rght++;
+                                if(rght>=len) break;
+                                if(str[rght]=='1') total_one++;
+                        }
+                        if(rght==len) break;
+                        ans=ans+ (left[lft]+1)*(right[rght]+1);
+//DEBUG(lft, rght, total_one,ans)
+                        do{lft++;}
+                        while(lft<len && str[lft]=='0');
+                        total_one--;
+                }
+                cout<<ans;
         }
 };
 
@@ -90,6 +117,18 @@ int main()
         ob.solve();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
